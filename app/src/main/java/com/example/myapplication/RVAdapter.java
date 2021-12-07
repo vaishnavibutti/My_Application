@@ -29,7 +29,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.viewHolder> {
     @Override
     public  void onBindViewHolder(viewHolder viewHolder, int position) {
         viewHolder.name.setText(arrayList.get(position).getName());
-        viewHolder.image.setImageResource(arrayList.get(position).getImage());
+        viewHolder.type.setText(arrayList.get(position).getType());
 
 
         viewHolder.button.setOnClickListener(new View.OnClickListener() {
@@ -52,15 +52,16 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.viewHolder> {
 
     public class viewHolder extends RecyclerView.ViewHolder {
         TextView name;
-        ImageView image;
+
         ImageButton button;
+        TextView type;
 
         public viewHolder(View itemView) {
             super(itemView);
             name = (TextView) itemView.findViewById(R.id.name);
-            image = (ImageView) itemView.findViewById(R.id.image);
-            button=(ImageButton) itemView.findViewById(R.id.button);
 
+            button=(ImageButton) itemView.findViewById(R.id.button);
+            type=itemView.findViewById(R.id.hee);
 
         }
 
@@ -68,17 +69,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.viewHolder> {
 
     public static class ItemModel {
 
-        int image;
+
         String name;
         String type;
 
-        public int getImage() {
-            return image;
-        }
 
-        public void setImage(int image) {
-            this.image = image;
-        }
 
         public String getName() {
             return name;
