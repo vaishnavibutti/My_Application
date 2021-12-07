@@ -6,14 +6,18 @@
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/baseline_calendar_month_20.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/baseline_home_20.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/baseline_home_24.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/calender.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/drawable/ic_launcher_background.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/activity_main.xml" value="0.1" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/content_main.xml" value="0.2" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_first.xml" value="0.2" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/calendar_main.xml" value="0.25" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/calender.xml" value="0.152" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/content_main.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/first_ques.xml" value="0.8800000000000001" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_first.xml" value="0.152" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_fourth.xml" value="0.12708333333333333" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_second.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/fragment_third.xml" value="0.1" />
-        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_list.xml" value="0.1" />
+        <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/item_list.xml" value="0.2" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/layout/nav_header.xml" value="0.1" />
         <entry key="..\:/Users/Dell/AndroidStudioProjects/MyApplication/app/src/main/res/menu/nav_menu.xml" value="0.1265625" />
       </map>

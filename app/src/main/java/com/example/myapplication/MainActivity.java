@@ -1,14 +1,18 @@
 package com.example.myapplication;
 
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
+import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.viewpager2.widget.ViewPager2;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 
 
 import com.google.android.material.navigation.NavigationView;
@@ -16,7 +20,7 @@ import com.google.android.material.navigation.NavigationView;
 import com.google.android.material.tabs.TabLayout;
 import com.google.android.material.tabs.TabLayoutMediator;
 
-public class MainActivity extends AppCompatActivity  {
+public class MainActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     DrawerLayout drawerLayout;
     ActionBarDrawerToggle toggle;
     NavigationView navigationView;
@@ -43,7 +47,7 @@ public class MainActivity extends AppCompatActivity  {
         drawerLayout.addDrawerListener(toggle);
         toggle.setDrawerIndicatorEnabled(true);
         toggle.syncState();
-
+        navigationView.setNavigationItemSelectedListener(this);
         viewPager2=findViewById(R.id.viewpager);
         tabLayout=findViewById(R.id.tablayout);
         viewpager= new PagerAdapter(this);
@@ -53,6 +57,19 @@ public class MainActivity extends AppCompatActivity  {
     }
 
 
+    @Override
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.FirstItem:
+                drawerLayout.closeDrawer(GravityCompat.START);
+                return true;
+            case R.id.SecondItem:
+               Intent intent=new Intent(this,Calender.class);
+               startActivity(intent);
+               return true;
+            default:
+                return true;
+        }
 
-
+    }
 }
