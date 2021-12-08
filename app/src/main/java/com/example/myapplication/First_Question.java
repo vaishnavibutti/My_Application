@@ -16,20 +16,33 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
+import com.google.firebase.firestore.QuerySnapshot;
+import com.google.firebase.firestore.SetOptions;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 
 public class First_Question extends AppCompatActivity {
+    Boolean isthere;
 EditText name;
 Button button;
 FirebaseFirestore db;
@@ -38,6 +51,7 @@ TimePickerDialog timePickerDialog;
     EditText date;
     EditText time;
     EditText topics;
+    EditText subjects;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,6 +62,7 @@ TimePickerDialog timePickerDialog;
         date=(EditText) findViewById(R.id.Date);
         time=findViewById(R.id.Time);
         topics=findViewById(R.id.Topics);
+        subjects=findViewById(R.id.subject);
         date.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -84,6 +99,12 @@ TimePickerDialog timePickerDialog;
                 String nam = name.getText().toString().trim();
                 String tim = time.getText().toString().trim();
                 String topic = topics.getText().toString().trim();
+                String subjec= subjects.getText().toString().trim();
+                if(subjec.isEmpty()){
+                    Toast.makeText(v.getContext(), "Subject can't be empty", Toast.LENGTH_SHORT).show();
+                    name.requestFocus();
+                    return;
+                }
                 if(nam.isEmpty()){
                     Toast.makeText(v.getContext(), "Name can't be empty", Toast.LENGTH_SHORT).show();
                     name.requestFocus();
@@ -104,13 +125,17 @@ TimePickerDialog timePickerDialog;
 
 
                 Map<String, Object> city = new HashMap<>();
+                Map<String,Object> s=new HashMap<>();
+                s.put("number",1);
                 city.put("name",nam);
                 city.put("date",dat);
                 city.put("time",tim);
 
                 city.put("topics",topic);
+                city.put("course",subjec);
+                String xy=dat.replaceAll("/","-");
 
-                db.collection("Exam").document(nam).set(city).addOnSuccessListener(new OnSuccessListener<Void>() {
+                db.collection("Exam").document(nam).set(city,SetOptions.merge()).addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void unused) {
                         Log.d(TAG, "DocumentSnapshot successfully written!");
@@ -121,11 +146,57 @@ TimePickerDialog timePickerDialog;
                         Log.w(TAG,"Error writing document",e);
                     }
                 });
+
+
+                db.collection(xy).document("Exam").collection(nam).document(subjec).set(city).addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void unused) {
+                        DocumentReference docref= db.collection(xy).document("Exam");
+                        docref.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                            @Override
+                            public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                                if(!(value.contains("number"))){
+                                    docref.set(s);
+                                }
+
+
+                            }
+                        });
+                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                    }
+                }).addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        Log.w(TAG,"Error writing document",e);
+                    }
+                });
+
+
+
                 finish();
+                db.collection(xy).document("Exam").update("number",FieldValue.increment(1));
+
+
+
+
+
+                RVAdapter.ItemModel itemModel = new RVAdapter.ItemModel();
+                itemModel.setName(nam);
+                itemModel.setTopics(topic);
+                itemModel.setTime(tim);
+                itemModel.setDate(dat);
+                itemModel.setSubject(subjec);
+                First.arrayList.add(itemModel);
+                First.adapter =  new RVAdapter(First.arrayList);
+                First.adapter.notifyDataSetChanged();
+                First.recyclerview.setAdapter(First.adapter);
+                System.out.println("|------------------------"+First.arrayList.size()+"---------------------|");
                 Fragment fragment = new First();
+
                 FragmentManager fragmentManager=getSupportFragmentManager();
 
-                fragmentManager.beginTransaction().replace(R.id.fi,fragment).addToBackStack(null).commit();
+//                fragmentManager.beginTransaction().replace(R.id.fi,fragment).addToBackStack(null).commit();
+                fragmentManager.beginTransaction().replace(R.id.fi,fragment).commit();
 
             }
         });

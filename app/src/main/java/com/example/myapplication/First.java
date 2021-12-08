@@ -6,9 +6,7 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -16,41 +14,31 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.firestore.DocumentSnapshot;
-import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QuerySnapshot;
 
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
-import java.util.Map;
-import java.util.Optional;
 
 
 public class First extends Fragment {
     FloatingActionButton Add;
     FirebaseFirestore db;
     List<DocumentSnapshot> mylist;
-    private static ArrayList<com.example.myapplication.Type> mArrayList  ;
+    public static ArrayList<First_Type> mArrayList  ;
+    static RVAdapter adapter;
 
     String name[]={"home","add","calender"};
 
-    RecyclerView recyclerview;
-    ArrayList<RVAdapter.ItemModel> arrayList;
+    static RecyclerView recyclerview;
+   static ArrayList<RVAdapter.ItemModel> arrayList;
 
 
 
@@ -69,17 +57,24 @@ public class First extends Fragment {
                                                                      return;
                                                                  }
                                                                  else{
-                                                                     List<Type> types=queryDocumentSnapshots.toObjects(Type.class);
+                                                                     List<First_Type> firstTypes =queryDocumentSnapshots.toObjects(First_Type.class);
 
-                                                                     mArrayList.addAll(types);
+                                                                     mArrayList.addAll(firstTypes);
                                                                      Log.d(TAG,"onSuccess: "+mArrayList);
 
                                                                      System.out.println(mArrayList.get(0).getName());
                                                                      System.out.println(mArrayList.size());
+                                                                     for(int i=0;i<mArrayList.size();i++){
                                                                      RVAdapter.ItemModel itemModel = new RVAdapter.ItemModel();
-                                                                     itemModel.setName(mArrayList.get(0).getName());
-                                                                     itemModel.setType(mArrayList.get(0).getDate());
+                                                                     String x = mArrayList.get(i).getTopics().replaceAll("\n",",");
+                                                                     itemModel.setName(mArrayList.get(i).getName());
+                                                                     itemModel.setTime(mArrayList.get(i).getTime());
+                                                                     itemModel.setDate(mArrayList.get(i).getDate());
+                                                                     itemModel.setTime(mArrayList.get(i).getTime());
+                                                                     itemModel.setSubject(mArrayList.get(i).getCourse());
+                                                                     itemModel.setTopics(x);
                                                                      arrayList.add(itemModel);
+                                                                     }
                                                                      RVAdapter adapter = new RVAdapter(arrayList);
                                                                      recyclerview.setAdapter(adapter);
 
@@ -106,28 +101,16 @@ public class First extends Fragment {
             public void onClick(View v) {
 
                 Toast.makeText(getContext(), "HEYY", Toast.LENGTH_SHORT).show();
-              // startActivity(new Intent(getActivity(),Second.class));
+              //startActivity(new Intent(getActivity(),Second.class));
+
                 Intent intent = new Intent(getActivity(),First_Question.class);
                 ((MainActivity) getActivity()).startActivity(intent);
+
             }
         });
 
-        System.out.println(mArrayList.size());
-        for (int i = 0; i < 6; i++) {
-            RVAdapter.ItemModel itemModel = new RVAdapter.ItemModel();
-            itemModel.setName(name[i/2]);
-            itemModel.setType("Exam");
 
 
-
-
-            //add in array list
-            arrayList.add(itemModel);
-            System.out.println(arrayList.get(i).getName());
-        }
-        System.out.println("heyy"+mArrayList.size());
-
-        System.out.println("hello");
         return rootView;
 
     }
