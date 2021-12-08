@@ -78,7 +78,7 @@ public class First extends Fragment {
                                                                      }
 
                                                                     RVAdapter adapter = new RVAdapter(arrayList);
-                                                                    // RVAdapter adapter = new RVAdapter(mArrayList);
+
                                                                      recyclerview.setAdapter(adapter);
 
                                                                  }
@@ -94,7 +94,7 @@ public class First extends Fragment {
         // Inflate the layout for this fragment
         View rootView=inflater.inflate(R.layout.fragment_first, container, false);
         Add= rootView.findViewById(R.id.add);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
+        LinearLayoutManager layoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         recyclerview = (RecyclerView) rootView.findViewById(R.id.recyclerview);
         recyclerview.setLayoutManager(layoutManager);
         System.out.println(mArrayList.size());

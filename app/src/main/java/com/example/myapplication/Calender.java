@@ -121,14 +121,12 @@ public class Calender extends AppCompatActivity implements NavigationView.OnNavi
                   public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
                       if(value.exists()){
                           String Stud=value.get("number").toString();
-                          totalstudyplan.setText(Stud);
-                          if(!(Stud.equals("0"))){
-                              table.setVisibility(View.VISIBLE);
-                          }
+
                       }
-                      else{
+
                           totalstudyplan.setText("0");
-                      }
+                          table.setVisibility(View.VISIBLE);
+
                   }
               });
 

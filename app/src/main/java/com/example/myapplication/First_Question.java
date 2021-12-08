@@ -21,6 +21,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -188,7 +190,8 @@ TimePickerDialog timePickerDialog;
                 itemModel.setCourse(subjec);
                 First.arrayList.add(itemModel);
                 First.adapter =  new RVAdapter(First.arrayList);
-                First.adapter.notifyDataSetChanged();
+
+               
                 First.recyclerview.setAdapter(First.adapter);
 
                 Fragment fragment = new First();
