@@ -40,7 +40,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.viewHolder> {
         viewHolder.time.setText(arrayList.get(position).getTime());
         viewHolder.date.setText(arrayList.get(position).getDate());
         viewHolder.topics.setText(arrayList.get(position).getTopics());
-        viewHolder.subject.setText(arrayList.get(position).getSubject());
+        viewHolder.subject.setText(arrayList.get(position).getCourse());
         if(arrayList.get(position).getTopics().isEmpty()){
             viewHolder.topics.setVisibility(View.INVISIBLE);
             viewHolder.topic_heading.setVisibility(View.INVISIBLE);
@@ -90,6 +90,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.viewHolder> {
     }
 
     public class viewHolder extends RecyclerView.ViewHolder {
+
         TextView name;
         TextView date;
         TextView topics;
@@ -112,8 +113,9 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.viewHolder> {
 
         }
 
-    }
 
+
+}
     public static class ItemModel {
 
 
@@ -121,7 +123,7 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.viewHolder> {
         String time;
         String date;
         String topics;
-        String subject;
+        String course;
 
 
 
@@ -157,22 +159,11 @@ public class RVAdapter extends RecyclerView.Adapter<RVAdapter.viewHolder> {
             this.topics = topics;
         }
 
-        public String getSubject() {
-            return subject;
+        public String getCourse() {
+            return course;
         }
 
-        public void setSubject(String subject) {
-            this.subject = subject;
+        public void setCourse(String course) {
+            this.course = course;
         }
-    }
-
-
-
-
-
-
-
-
-
-
-}
+}}

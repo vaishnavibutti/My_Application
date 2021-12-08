@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
 
     PagerAdapter viewpager;
     ViewPager2 viewPager2;
-    private final String[] titles={"Exam","Assignment","Study Plan","Lecture"};
+    private final String[] titles={"Exam","Assignment","Lecture","Study Plan"};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

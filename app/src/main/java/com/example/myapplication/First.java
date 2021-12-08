@@ -38,15 +38,16 @@ public class First extends Fragment {
     String name[]={"home","add","calender"};
 
     static RecyclerView recyclerview;
-   static ArrayList<RVAdapter.ItemModel> arrayList;
+    static ArrayList<RVAdapter.ItemModel> arrayList;
 
 
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        arrayList = new ArrayList<>();
+
         mArrayList= new ArrayList<>();
+        arrayList = new ArrayList<>();
         db=FirebaseFirestore.getInstance();
 
         db.collection("Exam").get().addOnSuccessListener(new OnSuccessListener<QuerySnapshot>() {
@@ -65,17 +66,19 @@ public class First extends Fragment {
                                                                      System.out.println(mArrayList.get(0).getName());
                                                                      System.out.println(mArrayList.size());
                                                                      for(int i=0;i<mArrayList.size();i++){
-                                                                     RVAdapter.ItemModel itemModel = new RVAdapter.ItemModel();
-                                                                     String x = mArrayList.get(i).getTopics().replaceAll("\n",",");
-                                                                     itemModel.setName(mArrayList.get(i).getName());
-                                                                     itemModel.setTime(mArrayList.get(i).getTime());
-                                                                     itemModel.setDate(mArrayList.get(i).getDate());
-                                                                     itemModel.setTime(mArrayList.get(i).getTime());
-                                                                     itemModel.setSubject(mArrayList.get(i).getCourse());
-                                                                     itemModel.setTopics(x);
-                                                                     arrayList.add(itemModel);
+                                                                         RVAdapter.ItemModel itemModel = new RVAdapter.ItemModel();
+                                                                         String x = mArrayList.get(i).getTopics().replaceAll("\n",",");
+                                                                         itemModel.setName(mArrayList.get(i).getName());
+                                                                         itemModel.setTime(mArrayList.get(i).getTime());
+                                                                         itemModel.setDate(mArrayList.get(i).getDate());
+                                                                         itemModel.setTime(mArrayList.get(i).getTime());
+                                                                         itemModel.setCourse(mArrayList.get(i).getCourse());
+                                                                         itemModel.setTopics(x);
+                                                                         arrayList.add(itemModel);
                                                                      }
-                                                                     RVAdapter adapter = new RVAdapter(arrayList);
+
+                                                                    RVAdapter adapter = new RVAdapter(arrayList);
+                                                                    // RVAdapter adapter = new RVAdapter(mArrayList);
                                                                      recyclerview.setAdapter(adapter);
 
                                                                  }

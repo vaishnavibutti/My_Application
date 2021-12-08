@@ -42,7 +42,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
 public class First_Question extends AppCompatActivity {
-    Boolean isthere;
+
 EditText name;
 Button button;
 FirebaseFirestore db;
@@ -101,7 +101,7 @@ TimePickerDialog timePickerDialog;
                 String topic = topics.getText().toString().trim();
                 String subjec= subjects.getText().toString().trim();
                 if(subjec.isEmpty()){
-                    Toast.makeText(v.getContext(), "Subject can't be empty", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(v.getContext(), "Course can't be empty", Toast.LENGTH_SHORT).show();
                     name.requestFocus();
                     return;
                 }
@@ -185,12 +185,12 @@ TimePickerDialog timePickerDialog;
                 itemModel.setTopics(topic);
                 itemModel.setTime(tim);
                 itemModel.setDate(dat);
-                itemModel.setSubject(subjec);
+                itemModel.setCourse(subjec);
                 First.arrayList.add(itemModel);
                 First.adapter =  new RVAdapter(First.arrayList);
                 First.adapter.notifyDataSetChanged();
                 First.recyclerview.setAdapter(First.adapter);
-                System.out.println("|------------------------"+First.arrayList.size()+"---------------------|");
+
                 Fragment fragment = new First();
 
                 FragmentManager fragmentManager=getSupportFragmentManager();

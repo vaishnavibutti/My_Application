@@ -86,7 +86,51 @@ public class Calender extends AppCompatActivity implements NavigationView.OnNavi
                       }
                   }
               });
-
+              db.collection(Date).document("Assignment").addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                  @Override
+                  public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                      if(value.exists()){
+                          String Assign=value.get("number").toString();
+                          totalassignments.setText(Assign);
+                          if(!(Assign.equals("0"))){
+                             table.setVisibility(View.VISIBLE);
+                          }
+                      }
+                      else {
+                          totalassignments.setText("0");
+                      }
+                  }
+              });
+              db.collection(Date).document("Lecture").addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                  @Override
+                  public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                      if(value.exists()){
+                          String Lect=value.get("number").toString();
+                          totallectures.setText(Lect);
+                          if(!(Lect.equals("0"))){
+                              table.setVisibility(View.VISIBLE);
+                          }
+                      }
+                      else{
+                          totallectures.setText("0");
+                      }
+                  }
+              });
+              db.collection(Date).document("Study Plan").addSnapshotListener(new EventListener<DocumentSnapshot>() {
+                  @Override
+                  public void onEvent(@Nullable DocumentSnapshot value, @Nullable FirebaseFirestoreException error) {
+                      if(value.exists()){
+                          String Stud=value.get("number").toString();
+                          totalstudyplan.setText(Stud);
+                          if(!(Stud.equals("0"))){
+                              table.setVisibility(View.VISIBLE);
+                          }
+                      }
+                      else{
+                          totalstudyplan.setText("0");
+                      }
+                  }
+              });
 
           }
       });

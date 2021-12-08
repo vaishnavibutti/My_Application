@@ -20,6 +20,9 @@
             </intent-filter>
         </activity>
         <activity android:name=".First_Question"></activity>
+        <activity android:name=".Second_question"></activity>
+        <activity android:name=".Third_Question"></activity>
+        <activity android:name=".Fourth_Question"></activity>
         <activity android:name=".Calender" android:theme="@style/AppTheme.NoActionBar"> </activity>
 
     </application>
